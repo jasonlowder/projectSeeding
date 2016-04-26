@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KeplerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kepler.dbo.Canvases' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Canvases">
+          <Key>
+            <PropertyRef Name="CanvasId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Created" />
+            <PropertyRef Name="LastModified" />
+          </Key>
+          <Property Name="CanvasId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="LastModified" Type="datetime" Nullable="false" />
+          <Property Name="Shared" Type="bit" />
+          <Property Name="ProjectType" Type="nvarchar" MaxLength="16" />
+          <Property Name="PreviewURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="TemplateId" Type="int" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="IsShareable" Type="bit" />
+          <Property Name="CutMirror" Type="bit" />
+          <Property Name="CutQty" Type="smallint" />
+          <Property Name="LastAccessed" Type="datetime" />
+          <Property Name="AccessCount" Type="bigint" />
+          <Property Name="UniqueID" Type="uniqueidentifier" />
+          <Property Name="ExtendedAttributes" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kepler.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="LoggedIn" />
+            <PropertyRef Name="CricutId" />
+            <PropertyRef Name="HasPreviousLogin" />
+            <PropertyRef Name="LastLatitude" />
+            <PropertyRef Name="LastLongitude" />
+            <PropertyRef Name="IsTester" />
+            <PropertyRef Name="IsCompany" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LoggedIn" Type="bit" Nullable="false" />
+          <Property Name="IP" Type="nvarchar" MaxLength="15" />
+          <Property Name="UKey" Type="binary" MaxLength="48" />
+          <Property Name="LoginTime" Type="datetime" />
+          <Property Name="CricutId" Type="int" Nullable="false" />
+          <Property Name="HMAC" Type="binary" MaxLength="32" />
+          <Property Name="HasPreviousLogin" Type="bit" Nullable="false" />
+          <Property Name="LastLatitude" Type="float" Nullable="false" />
+          <Property Name="LastLongitude" Type="float" Nullable="false" />
+          <Property Name="CuttingKey" Type="binary" MaxLength="32" />
+          <Property Name="SoftAuthorization" Type="nchar" MaxLength="17" />
+          <Property Name="CurrentMAC" Type="nchar" MaxLength="17" />
+          <Property Name="SoftE0" Type="nchar" MaxLength="17" />
+          <Property Name="SoftE1" Type="nchar" MaxLength="17" />
+          <Property Name="SoftBlob" Type="binary" MaxLength="32" />
+          <Property Name="CurrentE0" Type="nchar" MaxLength="17" />
+          <Property Name="CurrentE1" Type="nchar" MaxLength="17" />
+          <Property Name="IsTester" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsCompany" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="ProjectGetDetailsByIDV2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjectID" Type="int" Mode="In" />
+          <Parameter Name="LanguageID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="RegionID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProjectsGetFeaturedLatestByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ImageCategoryID" Type="int" Mode="In" />
+          <Parameter Name="StartIndex" Type="int" Mode="In" />
+          <Parameter Name="ResultCount" Type="int" Mode="In" />
+          <Parameter Name="CricutImagePath" Type="nvarchar" Mode="In" />
+          <Parameter Name="ImageCategoryFilter" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="ProjectsGetFeaturedLatestByCategoryTotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ImageCategoryID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="KeplerModelStoreContainer">
+          <EntitySet Name="Canvases" EntityType="Self.Canvases" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Canvases].[CanvasId] AS [CanvasId], 
+    [Canvases].[UserId] AS [UserId], 
+    [Canvases].[Name] AS [Name], 
+    [Canvases].[Description] AS [Description], 
+    [Canvases].[Created] AS [Created], 
+    [Canvases].[LastModified] AS [LastModified], 
+    [Canvases].[Shared] AS [Shared], 
+    [Canvases].[ProjectType] AS [ProjectType], 
+    [Canvases].[PreviewURL] AS [PreviewURL], 
+    [Canvases].[StatusId] AS [StatusId], 
+    [Canvases].[TemplateId] AS [TemplateId], 
+    [Canvases].[ProjectId] AS [ProjectId], 
+    [Canvases].[IsShareable] AS [IsShareable], 
+    [Canvases].[CutMirror] AS [CutMirror], 
+    [Canvases].[CutQty] AS [CutQty], 
+    [Canvases].[LastAccessed] AS [LastAccessed], 
+    [Canvases].[AccessCount] AS [AccessCount], 
+    [Canvases].[UniqueID] AS [UniqueID], 
+    [Canvases].[ExtendedAttributes] AS [ExtendedAttributes]
+    FROM [dbo].[Canvases] AS [Canvases]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Users" EntityType="Self.Users" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Users].[UserId] AS [UserId], 
+    [Users].[Username] AS [Username], 
+    [Users].[Password] AS [Password], 
+    [Users].[FirstName] AS [FirstName], 
+    [Users].[LastName] AS [LastName], 
+    [Users].[LoggedIn] AS [LoggedIn], 
+    [Users].[IP] AS [IP], 
+    [Users].[UKey] AS [UKey], 
+    [Users].[LoginTime] AS [LoginTime], 
+    [Users].[CricutId] AS [CricutId], 
+    [Users].[HMAC] AS [HMAC], 
+    [Users].[HasPreviousLogin] AS [HasPreviousLogin], 
+    [Users].[LastLatitude] AS [LastLatitude], 
+    [Users].[LastLongitude] AS [LastLongitude], 
+    [Users].[CuttingKey] AS [CuttingKey], 
+    [Users].[SoftAuthorization] AS [SoftAuthorization], 
+    [Users].[CurrentMAC] AS [CurrentMAC], 
+    [Users].[SoftE0] AS [SoftE0], 
+    [Users].[SoftE1] AS [SoftE1], 
+    [Users].[SoftBlob] AS [SoftBlob], 
+    [Users].[CurrentE0] AS [CurrentE0], 
+    [Users].[CurrentE1] AS [CurrentE1], 
+    [Users].[IsTester] AS [IsTester], 
+    [Users].[CreatedDate] AS [CreatedDate], 
+    [Users].[IsCompany] AS [IsCompany]
+    FROM [dbo].[Users] AS [Users]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KeplerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Canvas">
+          <Key>
+            <PropertyRef Name="CanvasId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Created" />
+            <PropertyRef Name="LastModified" />
+          </Key>
+          <Property Name="CanvasId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Shared" Type="Boolean" />
+          <Property Name="ProjectType" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="PreviewURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="TemplateId" Type="Int32" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="IsShareable" Type="Boolean" />
+          <Property Name="CutMirror" Type="Boolean" />
+          <Property Name="CutQty" Type="Int16" />
+          <Property Name="LastAccessed" Type="DateTime" Precision="3" />
+          <Property Name="AccessCount" Type="Int64" />
+          <Property Name="UniqueID" Type="Guid" />
+          <Property Name="ExtendedAttributes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="LoggedIn" />
+            <PropertyRef Name="CricutId" />
+            <PropertyRef Name="HasPreviousLogin" />
+            <PropertyRef Name="LastLatitude" />
+            <PropertyRef Name="LastLongitude" />
+            <PropertyRef Name="IsTester" />
+            <PropertyRef Name="IsCompany" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoggedIn" Type="Boolean" Nullable="false" />
+          <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="UKey" Type="Binary" MaxLength="48" FixedLength="true" />
+          <Property Name="LoginTime" Type="DateTime" Precision="3" />
+          <Property Name="CricutId" Type="Int32" Nullable="false" />
+          <Property Name="HMAC" Type="Binary" MaxLength="32" FixedLength="true" />
+          <Property Name="HasPreviousLogin" Type="Boolean" Nullable="false" />
+          <Property Name="LastLatitude" Type="Double" Nullable="false" />
+          <Property Name="LastLongitude" Type="Double" Nullable="false" />
+          <Property Name="CuttingKey" Type="Binary" MaxLength="32" FixedLength="true" />
+          <Property Name="SoftAuthorization" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="CurrentMAC" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="SoftE0" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="SoftE1" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="SoftBlob" Type="Binary" MaxLength="32" FixedLength="true" />
+          <Property Name="CurrentE0" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="CurrentE1" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="IsTester" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsCompany" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="KeplerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Canvases" EntityType="Self.Canvas" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <FunctionImport Name="ProjectGetDetailsByIDV2" ReturnType="Collection(KeplerModel.ProjectGetDetailsByIDV2_Result)">
+            <Parameter Name="ProjectID" Mode="In" Type="Int32" />
+            <Parameter Name="LanguageID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="RegionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProjectsGetFeaturedLatestByCategory" ReturnType="Collection(KeplerModel.ProjectsGetFeaturedLatestByCategory_Result)">
+            <Parameter Name="ImageCategoryID" Mode="In" Type="Int32" />
+            <Parameter Name="StartIndex" Mode="In" Type="Int32" />
+            <Parameter Name="ResultCount" Mode="In" Type="Int32" />
+            <Parameter Name="CricutImagePath" Mode="In" Type="String" />
+            <Parameter Name="ImageCategoryFilter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProjectsGetFeaturedLatestByCategoryTotal" ReturnType="Collection(Int32)">
+          <Parameter Name="ImageCategoryID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ProjectGetDetailsByIDV2_Result">
+          <Property Type="Int32" Name="ProjectID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ProfileID" Nullable="false" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="PublishDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdateDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="StatusID" Nullable="false" />
+          <Property Type="String" Name="ProjectURL" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OverviewDescription" Nullable="true" />
+          <Property Type="String" Name="DifficultyID" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TimeRequiredID" Nullable="true" />
+          <Property Type="String" Name="OtherMaterials" Nullable="true" />
+          <Property Type="String" Name="Keywords" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="IsFeatured" Nullable="false" />
+          <Property Type="Int32" Name="DefaultImageId" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="true" />
+          <Property Type="Int32" Name="CanvasId" Nullable="true" />
+          <Property Type="String" Name="ImageURL" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TimeRequired" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ProjectsGetFeaturedLatestByCategory_Result">
+          <Property Type="Int32" Name="ProjectID" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="CanvasId" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="OverviewDescription" Nullable="true" />
+          <Property Type="String" Name="OtherMaterials" Nullable="true" />
+          <Property Type="Boolean" Name="IsFeatured" Nullable="false" />
+          <Property Type="String" Name="TimeRequired" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ScreenName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ImageURL" Nullable="true" MaxLength="306" />
+          <Property Type="Int32" Name="ImageOrder" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Faves" Nullable="false" />
+          <Property Type="DateTime" Name="PublishDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ExtendedAttributes" Nullable="true" />
+          <Property Type="Boolean" Name="InAccess" Nullable="true" />
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KeplerModelStoreContainer" CdmEntityContainer="KeplerEntities">
+          <EntitySetMapping Name="Canvases">
+            <EntityTypeMapping TypeName="KeplerModel.Canvas">
+              <MappingFragment StoreEntitySet="Canvases">
+                <ScalarProperty Name="CanvasId" ColumnName="CanvasId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="Shared" ColumnName="Shared" />
+                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+                <ScalarProperty Name="PreviewURL" ColumnName="PreviewURL" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="IsShareable" ColumnName="IsShareable" />
+                <ScalarProperty Name="CutMirror" ColumnName="CutMirror" />
+                <ScalarProperty Name="CutQty" ColumnName="CutQty" />
+                <ScalarProperty Name="LastAccessed" ColumnName="LastAccessed" />
+                <ScalarProperty Name="AccessCount" ColumnName="AccessCount" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+                <ScalarProperty Name="ExtendedAttributes" ColumnName="ExtendedAttributes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="KeplerModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="LoggedIn" ColumnName="LoggedIn" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="UKey" ColumnName="UKey" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="CricutId" ColumnName="CricutId" />
+                <ScalarProperty Name="HMAC" ColumnName="HMAC" />
+                <ScalarProperty Name="HasPreviousLogin" ColumnName="HasPreviousLogin" />
+                <ScalarProperty Name="LastLatitude" ColumnName="LastLatitude" />
+                <ScalarProperty Name="LastLongitude" ColumnName="LastLongitude" />
+                <ScalarProperty Name="CuttingKey" ColumnName="CuttingKey" />
+                <ScalarProperty Name="SoftAuthorization" ColumnName="SoftAuthorization" />
+                <ScalarProperty Name="CurrentMAC" ColumnName="CurrentMAC" />
+                <ScalarProperty Name="SoftE0" ColumnName="SoftE0" />
+                <ScalarProperty Name="SoftE1" ColumnName="SoftE1" />
+                <ScalarProperty Name="SoftBlob" ColumnName="SoftBlob" />
+                <ScalarProperty Name="CurrentE0" ColumnName="CurrentE0" />
+                <ScalarProperty Name="CurrentE1" ColumnName="CurrentE1" />
+                <ScalarProperty Name="IsTester" ColumnName="IsTester" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsCompany" ColumnName="IsCompany" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ProjectGetDetailsByIDV2" FunctionName="KeplerModel.Store.ProjectGetDetailsByIDV2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KeplerModel.ProjectGetDetailsByIDV2_Result">
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="ProjectURL" ColumnName="ProjectURL" />
+                <ScalarProperty Name="OverviewDescription" ColumnName="OverviewDescription" />
+                <ScalarProperty Name="DifficultyID" ColumnName="DifficultyID" />
+                <ScalarProperty Name="TimeRequiredID" ColumnName="TimeRequiredID" />
+                <ScalarProperty Name="OtherMaterials" ColumnName="OtherMaterials" />
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="DefaultImageId" ColumnName="DefaultImageId" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CanvasId" ColumnName="CanvasId" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="TimeRequired" ColumnName="TimeRequired" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProjectsGetFeaturedLatestByCategory" FunctionName="KeplerModel.Store.ProjectsGetFeaturedLatestByCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KeplerModel.ProjectsGetFeaturedLatestByCategory_Result">
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CanvasId" ColumnName="CanvasId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="OverviewDescription" ColumnName="OverviewDescription" />
+                <ScalarProperty Name="OtherMaterials" ColumnName="OtherMaterials" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="TimeRequired" ColumnName="TimeRequired" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ImageOrder" ColumnName="ImageOrder" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Faves" ColumnName="Faves" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="ExtendedAttributes" ColumnName="ExtendedAttributes" />
+                <ScalarProperty Name="InAccess" ColumnName="InAccess" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProjectsGetFeaturedLatestByCategoryTotal" FunctionName="KeplerModel.Store.ProjectsGetFeaturedLatestByCategoryTotal" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

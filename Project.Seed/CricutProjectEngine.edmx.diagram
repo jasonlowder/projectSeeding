@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d3e6a5f2b8014fbbbe6cbf3fea4ed852" Name="Diagram1">
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ApplicationSetting" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ApplicationSettingType" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Award" Width="1.5" PointX="6" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Badge" Width="1.5" PointX="0.75" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.CartridgeActivity" Width="1.5" PointX="5.25" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Category" Width="1.5" PointX="9" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Comment" Width="1.5" PointX="8.25" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.CommentStatu" Width="1.5" PointX="6" PointY="45.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Contest" Width="1.5" PointX="9" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.CrafterTag" Width="1.5" PointX="0.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.CraftInterestTag" Width="1.5" PointX="0.75" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ErrorLog" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Faq" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Follower" Width="1.5" PointX="5.25" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Frequency" Width="1.5" PointX="0.75" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Gender" Width="1.5" PointX="0.75" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.InappropriateFlagReason" Width="1.5" PointX="5.25" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.NotificationFrequency" Width="1.5" PointX="6" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.NotificationHistory" Width="1.5" PointX="10.5" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.NotificationType" Width="1.5" PointX="6" PointY="51.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Profile" Width="1.5" PointX="3" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProfileAward" Width="1.5" PointX="8.25" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProfileContest" Width="1.5" PointX="5.25" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProfileNotification" Width="1.5" PointX="8.25" PointY="38.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProfilePhoto" Width="1.5" PointX="5.25" PointY="48.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProfileStatu" Width="1.5" PointX="0.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Project" Width="1.5" PointX="11.25" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectAward" Width="1.5" PointX="11.25" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectAward1" Width="1.5" PointX="13.5" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectCartridge" Width="1.5" PointX="13.5" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectComment" Width="1.5" PointX="16.5" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectCutFile" Width="1.5" PointX="13.5" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectDifficulty" Width="1.5" PointX="9" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectFollower" Width="1.5" PointX="16.5" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectImage" Width="1.5" PointX="13.5" PointY="43.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectProduct" Width="1.5" PointX="13.5" PointY="48.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectRating" Width="1.5" PointX="16.5" PointY="38.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectStatu" Width="1.5" PointX="9" PointY="47.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectStep" Width="1.5" PointX="13.5" PointY="53.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectStepImage" Width="1.5" PointX="15.75" PointY="48.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectTag" Width="1.5" PointX="19.5" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectTagGroup" Width="1.5" PointX="17.25" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectTagNavigation" Width="1.5" PointX="17.25" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ProjectTime" Width="1.5" PointX="9" PointY="49.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.PromoSection" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.Promotion" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.SocialConnection" Width="1.5" PointX="5.25" PointY="66.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.UserSelectedCartridge" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.UserType" Width="1.5" PointX="0.75" PointY="45.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricutProjectEngineModel.ViewedProject" Width="1.5" PointX="19.5" PointY="31" IsExpanded="true" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ApplicationSettings_ApplicationSettingTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProfileAward_Award" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_CartridgeActivity_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Project_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Comment_Comment" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Comment_CommentedProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Comment_CommentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Comment_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectComment_CommentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Followers_Profile2" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Followers_Profile3" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Profile_Frequency" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Profile_Frequency1" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Profile_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_InappropriateFlagReason_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProfileNotifications_NotificationFrequency" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_NotificationHistory_ProfileNotifications" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProfileNotifications_NotificationType" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Profile_ProfileStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Profile_UserType" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProfileAward_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProfileContest_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProfileNotifications_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProfilePhoto_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Project_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectComment_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectFollowers_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectRating_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_SocialConnection_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ViewedProjects_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Project_ProjectDifficulty" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Project_ProjectImage" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Project_ProjectTime" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Project_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectAward_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectCartridge_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectComment_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectCutFile_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectFollowers_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectImage_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectProduct_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectRating_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectStep_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ViewedProjects_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectAward_Award" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectStepImage_ProjectImage" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectStepImage_ProjectStep" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectTag_ProjectTagGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_ProjectTag_ProjectTagNavigation" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.FK_Promotions_PromoSection" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.ProfileBadge" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.ProfileCrafterTag" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.ProfileCraftInterestTag" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.ProjectCategoryTags" ManuallyRouted="false" />
+        <AssociationConnector Association="CricutProjectEngineModel.ProjectContest" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
