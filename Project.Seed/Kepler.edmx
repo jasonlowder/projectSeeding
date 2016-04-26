@@ -5,6 +5,28 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="KeplerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Canvas_ImageCategories">
+          <Key>
+            <PropertyRef Name="CanvasID" />
+            <PropertyRef Name="ImageCategoryID" />
+          </Key>
+          <Property Name="CanvasID" Type="int" Nullable="false" />
+          <Property Name="ImageCategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImageCategories">
+          <Key>
+            <PropertyRef Name="ImageCategoryID" />
+          </Key>
+          <Property Name="ImageCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsCategoryType" Type="bit" Nullable="false" />
+          <Property Name="ParentCategoryID" Type="int" />
+          <Property Name="IsProjectCategory" Type="bit" />
+          <Property Name="UniqueID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ImageURL" Type="varchar" MaxLength="255" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="ImageCategoryTypeID" Type="int" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Kepler.dbo.Canvases' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Canvases">
@@ -75,6 +97,30 @@ warning 6002: The table/view 'Kepler.dbo.Users' does not have a primary key defi
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="IsCompany" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Canvas_ImageCategories_ImageCategoryID">
+          <End Role="ImageCategories" Type="Self.ImageCategories" Multiplicity="1" />
+          <End Role="Canvas_ImageCategories" Type="Self.Canvas_ImageCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageCategories">
+              <PropertyRef Name="ImageCategoryID" />
+            </Principal>
+            <Dependent Role="Canvas_ImageCategories">
+              <PropertyRef Name="ImageCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ImageCategories_ParentCategoryID">
+          <End Role="ImageCategories" Type="Self.ImageCategories" Multiplicity="0..1" />
+          <End Role="ImageCategories1" Type="Self.ImageCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageCategories">
+              <PropertyRef Name="ImageCategoryID" />
+            </Principal>
+            <Dependent Role="ImageCategories1">
+              <PropertyRef Name="ParentCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="ProjectGetDetailsByIDV2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProjectID" Type="int" Mode="In" />
           <Parameter Name="LanguageID" Type="int" Mode="In" />
@@ -92,6 +138,8 @@ warning 6002: The table/view 'Kepler.dbo.Users' does not have a primary key defi
           <Parameter Name="ImageCategoryID" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="KeplerModelStoreContainer">
+          <EntitySet Name="Canvas_ImageCategories" EntityType="Self.Canvas_ImageCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageCategories" EntityType="Self.ImageCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Canvases" EntityType="Self.Canvases" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Canvases].[CanvasId] AS [CanvasId], 
@@ -144,6 +192,14 @@ warning 6002: The table/view 'Kepler.dbo.Users' does not have a primary key defi
     [Users].[IsCompany] AS [IsCompany]
     FROM [dbo].[Users] AS [Users]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Canvas_ImageCategories_ImageCategoryID" Association="Self.FK_Canvas_ImageCategories_ImageCategoryID">
+            <End Role="ImageCategories" EntitySet="ImageCategories" />
+            <End Role="Canvas_ImageCategories" EntitySet="Canvas_ImageCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ImageCategories_ParentCategoryID" Association="Self.FK_ImageCategories_ParentCategoryID">
+            <End Role="ImageCategories" EntitySet="ImageCategories" />
+            <End Role="ImageCategories1" EntitySet="ImageCategories" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -234,6 +290,16 @@ warning 6002: The table/view 'Kepler.dbo.Users' does not have a primary key defi
           <FunctionImport Name="ProjectsGetFeaturedLatestByCategoryTotal" ReturnType="Collection(Int32)">
           <Parameter Name="ImageCategoryID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Canvas_ImageCategories" EntityType="KeplerModel.Canvas_ImageCategories" />
+          <EntitySet Name="ImageCategories" EntityType="KeplerModel.ImageCategory" />
+          <AssociationSet Name="FK_Canvas_ImageCategories_ImageCategoryID" Association="KeplerModel.FK_Canvas_ImageCategories_ImageCategoryID">
+            <End Role="ImageCategory" EntitySet="ImageCategories" />
+            <End Role="Canvas_ImageCategories" EntitySet="Canvas_ImageCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ImageCategories_ParentCategoryID" Association="KeplerModel.FK_ImageCategories_ParentCategoryID">
+            <End Role="ImageCategory" EntitySet="ImageCategories" />
+            <End Role="ImageCategory1" EntitySet="ImageCategories" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ProjectGetDetailsByIDV2_Result">
           <Property Type="Int32" Name="ProjectID" Nullable="false" />
@@ -278,6 +344,56 @@ warning 6002: The table/view 'Kepler.dbo.Users' does not have a primary key defi
           <Property Type="Boolean" Name="InAccess" Nullable="true" />
           <Property Type="Int64" Name="RowNumber" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Canvas_ImageCategories">
+          <Key>
+            <PropertyRef Name="CanvasID" />
+            <PropertyRef Name="ImageCategoryID" />
+          </Key>
+          <Property Name="CanvasID" Type="Int32" Nullable="false" />
+          <Property Name="ImageCategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ImageCategory" Relationship="KeplerModel.FK_Canvas_ImageCategories_ImageCategoryID" FromRole="Canvas_ImageCategories" ToRole="ImageCategory" />
+        </EntityType>
+        <EntityType Name="ImageCategory">
+          <Key>
+            <PropertyRef Name="ImageCategoryID" />
+          </Key>
+          <Property Name="ImageCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsCategoryType" Type="Boolean" Nullable="false" />
+          <Property Name="ParentCategoryID" Type="Int32" />
+          <Property Name="IsProjectCategory" Type="Boolean" />
+          <Property Name="UniqueID" Type="Guid" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="ImageCategoryTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Canvas_ImageCategories" Relationship="KeplerModel.FK_Canvas_ImageCategories_ImageCategoryID" FromRole="ImageCategory" ToRole="Canvas_ImageCategories" />
+          <NavigationProperty Name="ImageCategories1" Relationship="KeplerModel.FK_ImageCategories_ParentCategoryID" FromRole="ImageCategory" ToRole="ImageCategory1" />
+          <NavigationProperty Name="ImageCategory1" Relationship="KeplerModel.FK_ImageCategories_ParentCategoryID" FromRole="ImageCategory1" ToRole="ImageCategory" />
+        </EntityType>
+        <Association Name="FK_Canvas_ImageCategories_ImageCategoryID">
+          <End Type="KeplerModel.ImageCategory" Role="ImageCategory" Multiplicity="1" />
+          <End Type="KeplerModel.Canvas_ImageCategories" Role="Canvas_ImageCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageCategory">
+              <PropertyRef Name="ImageCategoryID" />
+            </Principal>
+            <Dependent Role="Canvas_ImageCategories">
+              <PropertyRef Name="ImageCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ImageCategories_ParentCategoryID">
+          <End Type="KeplerModel.ImageCategory" Role="ImageCategory" Multiplicity="0..1" />
+          <End Type="KeplerModel.ImageCategory" Role="ImageCategory1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageCategory">
+              <PropertyRef Name="ImageCategoryID" />
+            </Principal>
+            <Dependent Role="ImageCategory1">
+              <PropertyRef Name="ParentCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -392,6 +508,29 @@ warning 6002: The table/view 'Kepler.dbo.Users' does not have a primary key defi
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ProjectsGetFeaturedLatestByCategoryTotal" FunctionName="KeplerModel.Store.ProjectsGetFeaturedLatestByCategoryTotal" />
+          <EntitySetMapping Name="Canvas_ImageCategories">
+            <EntityTypeMapping TypeName="KeplerModel.Canvas_ImageCategories">
+              <MappingFragment StoreEntitySet="Canvas_ImageCategories">
+                <ScalarProperty Name="ImageCategoryID" ColumnName="ImageCategoryID" />
+                <ScalarProperty Name="CanvasID" ColumnName="CanvasID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageCategories">
+            <EntityTypeMapping TypeName="KeplerModel.ImageCategory">
+              <MappingFragment StoreEntitySet="ImageCategories">
+                <ScalarProperty Name="ImageCategoryTypeID" ColumnName="ImageCategoryTypeID" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+                <ScalarProperty Name="IsProjectCategory" ColumnName="IsProjectCategory" />
+                <ScalarProperty Name="ParentCategoryID" ColumnName="ParentCategoryID" />
+                <ScalarProperty Name="IsCategoryType" ColumnName="IsCategoryType" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ImageCategoryID" ColumnName="ImageCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

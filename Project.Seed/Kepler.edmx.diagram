@@ -7,6 +7,10 @@
       <Diagram DiagramId="8df93f03525b4d9f98b59b7627e1e665" Name="Diagram1">
         <EntityTypeShape EntityType="KeplerModel.Canvas" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KeplerModel.User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KeplerModel.Canvas_ImageCategories" Width="1.5" PointX="7.625" PointY="1.875" />
+        <EntityTypeShape EntityType="KeplerModel.ImageCategory" Width="1.5" PointX="5.375" PointY="1" />
+        <AssociationConnector Association="KeplerModel.FK_Canvas_ImageCategories_ImageCategoryID" />
+        <AssociationConnector Association="KeplerModel.FK_ImageCategories_ParentCategoryID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

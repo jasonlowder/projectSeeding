@@ -86,6 +86,9 @@
     <Compile Include="Canvas.cs">
       <DependentUpon>Kepler.tt</DependentUpon>
     </Compile>
+    <Compile Include="Canvas_ImageCategories.cs">
+      <DependentUpon>Kepler.tt</DependentUpon>
+    </Compile>
     <Compile Include="CartridgeActivity.cs">
       <DependentUpon>CricutProjectEngine.tt</DependentUpon>
     </Compile>
@@ -137,6 +140,9 @@
     </Compile>
     <Compile Include="Gender.cs">
       <DependentUpon>CricutProjectEngine.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImageCategory.cs">
+      <DependentUpon>Kepler.tt</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IMongoApiService.cs" />
     <Compile Include="InappropriateFlagReason.cs">

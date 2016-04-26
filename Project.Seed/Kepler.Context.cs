@@ -29,6 +29,8 @@ namespace Project.Seed
     
         public virtual DbSet<Canvas> Canvases { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Canvas_ImageCategories> Canvas_ImageCategories { get; set; }
+        public virtual DbSet<ImageCategory> ImageCategories { get; set; }
     
         public virtual ObjectResult<ProjectGetDetailsByIDV2_Result> ProjectGetDetailsByIDV2(Nullable<int> projectID, Nullable<int> languageID, Nullable<int> userID, Nullable<int> regionID)
         {

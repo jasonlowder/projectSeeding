@@ -26,7 +26,7 @@ namespace Project.Seed
         {
             const string awsHost = "https://s3-us-west-2.amazonaws.com";
             const string awsBucket = "community-public-dev";
-            var mongoService = new Services.MongoApiService("http://localhost:3000");
+            var mongoService = new Services.MongoApiService("http://us-dev2-api.cricut.com"); // localhost:3000");
             foreach (var user in projects.Keys)
             {
                 var mongoUser = mongoService.Login(user);
