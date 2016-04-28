@@ -14,7 +14,7 @@ namespace Project.Seed.Mongo
 
         public MongoStep(CricutApi.ProjectStep step)
         {
-            Description = string.Format("{0} {1}", step.Title, step.Description);
+            Description = step.Description;
             Order = step.Order;
         }
     }

@@ -10,7 +10,7 @@ namespace Project.Seed.Mongo
         [JsonProperty("_id")]
         public string Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string Quote { get; set; }
         public List<MongoImage> ProjectImages { get; set; } = new List<MongoImage>();
         public MongoComplexity Complexity { get; set; }
         public MaterialsUsed MaterialsUsed { get; set; }
@@ -43,7 +43,6 @@ namespace Project.Seed.Mongo
         public MongoProject(ProjectDetails project)
         {
             Title = project.Title;
-            Description = project.OverviewDescription;
             CanvasId = project.CanvasId;
             ModifiedDate = project.UpdateDate;
             PublishDate = project.PublishDate;
@@ -59,8 +58,9 @@ namespace Project.Seed.Mongo
             MaterialsUsed = new MaterialsUsed(project.OtherMaterials);
 
             Instructions = new ProjectInstructions(project.StepDetails);
-            
-            foreach(var image in project.ProjectImages)
+            Instructions.Description = project.OverviewDescription;
+
+            foreach (var image in project.ProjectImages)
             {
                 ProjectImages.Add(new MongoImage(image));
             }

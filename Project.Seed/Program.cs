@@ -9,6 +9,7 @@ namespace Project.Seed
     {
         static void Main(string[] args)
         {
+            //UpdateTags();
             var recordCount = 10;
             var max = 5000;
             for (var startIndex = 0; startIndex < max; startIndex += recordCount)
@@ -26,7 +27,7 @@ namespace Project.Seed
         {
             const string awsHost = "https://s3-us-west-2.amazonaws.com";
             const string awsBucket = "community-public-dev";
-            var mongoService = new Services.MongoApiService("http://us-dev2-api.cricut.com"); // localhost:3000");
+            var mongoService = new Services.MongoApiService("http://localhost:3000");
             foreach (var user in projects.Keys)
             {
                 var mongoUser = mongoService.Login(user);
@@ -69,6 +70,24 @@ namespace Project.Seed
         {
             var projectService = new Services.ApiProjectService(resultCount, startIndex);
             return projectService.GetAll();
+        }
+
+        private static void UpdateTags()
+        {
+            var mongoService = new Services.MongoApiService("http://localhost:3000");
+            var efProjectService = new Services.EFProjectService();
+            var projects = mongoService.GetAllProjects();
+            foreach (var project in projects)
+            {
+                mongoService.LoadProjectDetails(project);
+                project.Tags = new List<string>();
+                var tags = efProjectService.GetProjectTags(project.CanvasId);
+                foreach (var tag in tags)
+                {
+                    project.Tags.Add(tag.TagName);
+                }
+            }
+            mongoService.SaveProjects(projects);
         }
     }
 }

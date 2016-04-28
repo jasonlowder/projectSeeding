@@ -98,22 +98,7 @@ namespace Project.Seed.Services
                     detailsObject.TagDetails = new List<CricutApi.ProjectTag>();
 
                     // Get the real tags
-                    using (var db = new KeplerEntities())
-                    {
-                        var query = from c in db.Canvas_ImageCategories
-                                    join i in db.ImageCategories on c.ImageCategoryID equals i.ImageCategoryID
-                                    where c.CanvasID == detailsObject.CanvasId
-                                    select new
-                                    {
-                                        Id = i.ImageCategoryID,
-                                        TagName = i.CategoryName
-                                    };
-                        var tags = query.ToList();
-                        foreach (var tag in tags)
-                        {
-                            detailsObject.TagDetails.Add(new CricutApi.ProjectTag { Id = tag.Id, TagName = tag.TagName });
-                        }
-                    }
+                    detailsObject.TagDetails = GetProjectTags(detailsObject.CanvasId);
 
                     projectList.Add(detailsObject);
                 }
@@ -137,6 +122,12 @@ namespace Project.Seed.Services
             // Get a session
             var session = client.GetAsync(getSessionUrl).Result;
             return client;
+        }
+
+        public List<CricutApi.ProjectTag> GetProjectTags(int canvasId)
+        {
+            var efProjectService = new EFProjectService();
+            return efProjectService.GetProjectTags(canvasId);
         }
     }
 }

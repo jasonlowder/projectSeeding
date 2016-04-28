@@ -4,8 +4,8 @@ namespace Project.Seed.Mongo
 {
     public class ProjectInstructions
     {
-        public string Blurb { get; set; }
-        public StepDetails StepDetails { get; set; }
+        public string Description { get; set; }
+        public List<Section> Sections { get; set; } = new List<Section>();
         public List<string> Tips { get; set; } = new List<string>();
 
         public ProjectInstructions()
@@ -14,7 +14,10 @@ namespace Project.Seed.Mongo
 
         public ProjectInstructions(List<CricutApi.ProjectStep> steps)
         {
-            StepDetails = new StepDetails(steps);
+            foreach (var step in steps)
+            {
+                Sections.Add(new Section(step));
+            }
         }
     }
 }

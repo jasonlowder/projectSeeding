@@ -12,6 +12,16 @@ namespace Project.Seed
 {
     public class MongoApi : IMongoApiService
     {
+        public List<MongoProject> GetAllProjects()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadProjectDetails(MongoProject project)
+        {
+            throw new NotImplementedException();
+        }
+
         public MongoUser Login(ApiUser user)
         {
             throw new NotImplementedException();

@@ -48,7 +48,7 @@ namespace Project.Seed.Services
                             OverallTimeRequired = details.TimeRequired
                         },
                         CreatedDate = details.CreationDate,
-                        Description = details.OverviewDescription,
+                        Quote = details.OverviewDescription,
                         MaterialsUsed = new MaterialsUsed(details.OtherMaterials),
                         ModifiedDate = details.UpdateDate,
                         ProfileId = details.ProfileID.ToString(),
@@ -119,6 +119,28 @@ namespace Project.Seed.Services
             using (var db = new KeplerEntities())
             {
                 return db.ProjectGetDetailsByIDV2(id, 1, 0, 2).ToList();
+            }
+        }
+
+        public List<CricutApi.ProjectTag> GetProjectTags(int canvasId)
+        {
+            using (var db = new KeplerEntities())
+            {
+                var query = from c in db.Canvas_ImageCategories
+                            join i in db.ImageCategories on c.ImageCategoryID equals i.ImageCategoryID
+                            where c.CanvasID == canvasId
+                            select new
+                            {
+                                Id = i.ImageCategoryID,
+                                TagName = i.CategoryName
+                            };
+                var tags = new List<CricutApi.ProjectTag>();
+
+                foreach (var tag in query.ToList())
+                {
+                    tags.Add(new CricutApi.ProjectTag { Id = tag.Id, TagName = tag.TagName });
+                }
+                return tags;
             }
         }
     }

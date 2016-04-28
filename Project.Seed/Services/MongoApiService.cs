@@ -71,7 +71,11 @@ namespace Project.Seed.Services
             foreach (var project in projects)
             {
                 VerifyReferences(project);
-                var json = JsonConvert.SerializeObject(project, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+                var json = JsonConvert.SerializeObject(project,
+                    new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    });
                 var payload = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = _client.PostAsync(projectsUrl, payload).Result;
                 
@@ -96,7 +100,7 @@ namespace Project.Seed.Services
 
         private void VerifyReferences(MongoProject project)
         {
-            VerifyMaterials(project.MaterialsUsed.Materials);
+            VerifyMaterials(project.MaterialsUsed.Materials.CutMaterials.Cricut);
             VerifyMachines(project.Complexity.CompatibleMachines);
             VerifySoftware(project.Complexity.CompatibleSoftware);
         }
@@ -221,7 +225,7 @@ namespace Project.Seed.Services
             if (!response.IsSuccessStatusCode) return false;
 
             var materials = response.Content.ReadAsAsync<List<ProjectMaterials>>().Result;
-            var m = materials.FirstOrDefault(mat => mat.Name == material);
+            var m = materials.FirstOrDefault(mat => mat.Name.ToLower() == material.ToLower());
             if (m != null)
             {
                 _materialCache.Add(material, m);
@@ -269,6 +273,26 @@ namespace Project.Seed.Services
             // Get a session
             var session = client.GetAsync(getSessionUrl).Result;
             return client;
+        }
+
+        public List<MongoProject> GetAllProjects()
+        {
+            const string getAllUrl = "/projects?pageSize=10000";
+            var response = _client.GetAsync(getAllUrl).Result;
+
+            if (!response.IsSuccessStatusCode) throw new Exception();
+
+            return response.Content.ReadAsAsync<List<MongoProject>>().Result;
+        }
+
+        public void LoadProjectDetails(MongoProject project)
+        {
+            var projectDetailsUrl = $"/projects/{project.Id}?full=true";
+            var response = _client.GetAsync(projectDetailsUrl).Result;
+
+            if (!response.IsSuccessStatusCode) throw new Exception();
+
+            project = response.Content.ReadAsAsync<MongoProject>().Result;
         }
 
         private class ProjectId

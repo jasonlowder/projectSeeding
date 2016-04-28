@@ -167,9 +167,11 @@
     </Compile>
     <Compile Include="MongoApi.cs" />
     <Compile Include="Mongo\Difficulty.cs" />
+    <Compile Include="Mongo\Materials.cs" />
     <Compile Include="Mongo\MaterialsUsed.cs" />
     <Compile Include="Mongo\MongoComplexity.cs" />
     <Compile Include="Mongo\MongoImage.cs" />
+    <Compile Include="Mongo\MongoMaterials.cs" />
     <Compile Include="Mongo\MongoProfile.cs" />
     <Compile Include="Mongo\MongoTag.cs" />
     <Compile Include="Mongo\MongoUser.cs" />
@@ -180,7 +182,6 @@
     <Compile Include="Mongo\StepImage.cs" />
     <Compile Include="Mongo\MongoStep.cs" />
     <Compile Include="Mongo\Section.cs" />
-    <Compile Include="Mongo\StepDetails.cs" />
     <Compile Include="NotificationFrequency.cs">
       <DependentUpon>CricutProjectEngine.tt</DependentUpon>
     </Compile>
